@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Moose Cargo – Last‑Mile Delivery, Done Right</title>
+  <meta name="description" content="Fast, friendly, and reliable last‑mile delivery across Canada. Schedule pickups, track in real‑time, and delight your customers with Moose Cargo." />
+  <meta property="og:title" content="Moose Cargo – Last‑Mile Delivery, Done Right" />
+  <meta property="og:description" content="Fast, friendly, and reliable last‑mile delivery across Canada." />
+  <meta property="og:image" content="assets/logo.png" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f0f10;
+      --card:#17181b;
+      --muted:#a0a6b2;
+      --brand:#ff9d1b;
+      --brand-2:#ffb847;
+      --text:#f7f8fa;
+      --ok:#10b981;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --glass: rgba(255,255,255,.06);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:radial-gradient(1600px 600px at 80% -100px, #ffb84722, transparent 60%), var(--bg); color:var(--text); font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; scroll-behavior:smooth}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+    /* Nav */
+    nav{position:sticky;top:0;z-index:30;background:linear-gradient(180deg, rgba(15,15,16,.9), rgba(15,15,16,.6) 60%, transparent); backdrop-filter:saturate(140%) blur(8px);}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;gap:12px;align-items:center;font-weight:800;letter-spacing:.2px}
+    .brand img{width:40px;height:40px;border-radius:12px;box-shadow:var(--shadow)}
+    .brand span{font-size:20px}
+    .menu{display:flex;gap:22px;align-items:center}
+    .menu a{opacity:.9}
+    .menu .cta{padding:10px 16px;border-radius:12px;background:linear-gradient(90deg,var(--brand),var(--brand-2)); color:#2a1600; font-weight:700; box-shadow:0 10px 20px #ff9d1b33}
+    .hamburger{display:none}
+    /* Hero */
+    .hero{position:relative;padding:80px 0 60px; overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+    .tag{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;background:var(--glass); border:1px solid #ffffff12; color:var(--muted); font-weight:600}
+    h1{font-size:56px;line-height:1.02;margin:16px 0 10px}
+    .sub{color:#c9ced6; font-size:18px; max-width:58ch}
+    .hero-card{background:linear-gradient(180deg, #1c1e23, #121317); border:1px solid #ffffff10; border-radius:var(--radius); padding:24px; box-shadow:var(--shadow)}
+    .points{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+    .point{display:flex;gap:10px;align-items:flex-start;padding:12px;border-radius:14px;background:var(--glass);border:1px solid #ffffff0f}
+    .point b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:7px;background:#0f241a;border:1px solid #0e3f2a;color:var(--ok);font-size:14px}
+    .hero-visual{position:relative; isolation:isolate}
+    .hero-visual .glow{position:absolute;inset:-20% -40% auto -40%; height:420px; filter:blur:80px; background:radial-gradient(closest-side, #ff9d1b44, transparent 70%); z-index:-1}
+    .card-stack{display:grid; gap:14px}
+    .card{padding:16px;border-radius:16px;background:linear-gradient(180deg,#191b20,#111217); border:1px solid #ffffff10; box-shadow:var(--shadow); display:flex; align-items:center; gap:12px}
+    .card .dot{width:10px;height:10px;border-radius:50%;background:var(--brand)}
+    /* Sections */
+    .section{padding:70px 0}
+    .section h2{font-size:36px;margin:0 0 12px}
+    .muted{color:var(--muted)}
+    /* Features */
+    .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .feature{padding:20px;border-radius:18px;background:linear-gradient(180deg,#17181b,#121317); border:1px solid #ffffff12}
+    .feature h3{margin:6px 0 6px}
+    /* Steps */
+    .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+    .step{padding:20px;border-radius:16px;background:var(--glass);border:1px solid #ffffff10}
+    .step .num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:10px;background:linear-gradient(90deg,var(--brand),var(--brand-2)); color:#2a1600; font-weight:900}
+    /* CTA band */
+    .cta-band{margin-top:40px;padding:26px;border-radius:20px;background:linear-gradient(90deg,#1c1f26,#171a21);border:1px solid #ffffff12;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .input{display:flex;gap:8px;align-items:center;background:#0f1116;border:1px solid #ffffff12;border-radius:14px;padding:8px}
+    .input input{all:unset;padding:10px 8px;min-width:240px}
+    .button{padding:12px 18px;border-radius:12px;background:linear-gradient(90deg,var(--brand),var(--brand-2)); color:#2a1600; font-weight:800; border:none; cursor:pointer}
+    /* Testimonials & Pricing */
+    .tgrid{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+    .testimonial, .price{padding:20px;border-radius:18px;background:linear-gradient(180deg,#17181b,#121317); border:1px solid #ffffff10}
+    .tquote{font-size:18px}
+    .plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:8px}
+    .plan{padding:20px;border-radius:16px;background:var(--glass);border:1px solid #ffffff10}
+    .plan h3{margin:2px 0 8px}
+    .plan .tag{margin:6px 0}
+    /* Footer */
+    footer{padding:50px 0 70px;border-top:1px solid #ffffff0f;margin-top:40px}
+    .foot{display:grid;grid-template-columns:1.2fr .8fr .8fr 1fr;gap:18px}
+    .foot h4{margin:10px 0}
+    .foot a{display:block;margin:8px 0;color:var(--muted)}
+    .copyright{margin-top:24px;color:#7f8794}
+    /* Responsive */
+    @media (max-width: 1024px){
+      .hero-grid{grid-template-columns:1fr;gap:24px}
+      .tgrid{grid-template-columns:1fr}
+      .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .foot{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 640px){
+      h1{font-size:40px}
+      .menu{display:none}
+      .hamburger{display:block;cursor:pointer}
+      .grid-3{grid-template-columns:1fr}
+      .steps{grid-template-columns:1fr}
+      .foot{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="#home">
+        <img src="assets/logo.png" alt="Moose Cargo logo" />
+        <span>Moose Cargo</span>
+      </a>
+      <div class="menu">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact" class="cta">Get started</a>
+      </div>
+      <div class="hamburger" onclick="document.querySelector('.menu').style.display = (getComputedStyle(document.querySelector('.menu')).display === 'none' ? 'flex':'none')">
+        ☰
+      </div>
+    </div>
+  </nav>
+
+  <header id="home" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="tag">🚚 Same‑day • 🇨🇦 Canada‑wide</span>
+        <h1>Deliver delight with <span style="background:linear-gradient(90deg,var(--brand),var(--brand-2)); -webkit-background-clip:text;background-clip:text;color:transparent">Moose Cargo</span>.</h1>
+        <p class="sub">A last‑mile delivery partner your customers will love—real‑time tracking, smooth pickups, and friendly drivers. Built for local shops and fast‑growing e‑commerce brands.</p>
+        <div class="hero-card">
+          <form onsubmit="event.preventDefault(); alert('Thanks! We\'ll reach out shortly.');">
+            <div class="cta-band">
+              <div class="input">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v1l-10 6L2 7V6a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="1.4"/><path d="M22 8l-10 6L2 8" stroke="currentColor" stroke-width="1.4"/></svg>
+                <input type="email" placeholder="Work email" required>
+              </div>
+              <button class="button">Get a demo</button>
+            </div>
+          </form>
+          <div class="points">
+            <div class="point"><b>✓</b> Live tracking + SMS updates</div>
+            <div class="point"><b>✓</b> Route optimization</div>
+            <div class="point"><b>✓</b> Shopify & WooCommerce ready</div>
+            <div class="point"><b>✓</b> Insurance on every parcel</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="glow"></div>
+        <div class="card-stack">
+          <div class="card"><div class="dot"></div> <b>Pickup confirmed</b> — Driver en route</div>
+          <div class="card"><div class="dot"></div> <b>Route ETA</b> — 34 min • 7 stops</div>
+          <div class="card"><div class="dot"></div> <b>Signature captured</b> — Proof of delivery</div>
+          <div class="card"><div class="dot"></div> <b>Customer rating</b> — 4.9/5 ⭐</div>
+          <img src="assets/logo.png" alt="Moose Cargo" style="width:180px;margin:6px auto 0;display:block;opacity:.9">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="features" class="section">
+    <div class="container">
+      <h2>Why choose Moose Cargo?</h2>
+      <p class="muted">A platform designed to make local delivery effortless for you and delightful for recipients.</p>
+      <div class="grid-3" style="margin-top:16px">
+        <div class="feature">
+          <h3>Real‑time tracking</h3>
+          <p>Know exactly where your parcels are, with live map tracking and automated SMS/Email updates.</p>
+        </div>
+        <div class="feature">
+          <h3>Instant quotes</h3>
+          <p>Transparent pricing before you book—no surprises, just simple tiered rates that scale with you.</p>
+        </div>
+        <div class="feature">
+          <h3>Developer‑friendly</h3>
+          <p>Clean API + webhooks and native Shopify integration. Import orders and dispatch in one click.</p>
+        </div>
+        <div class="feature">
+          <h3>Green fleet</h3>
+          <p>We prioritize fuel‑efficient routes and EVs wherever possible to reduce emissions.</p>
+        </div>
+        <div class="feature">
+          <h3>Photo proof</h3>
+          <p>Every delivery includes photo & signature proof securely stored for your records.</p>
+        </div>
+        <div class="feature">
+          <h3>Human support</h3>
+          <p>Talk to real people—7 days a week—who actually care. Average response time under 2 minutes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="section">
+    <div class="container">
+      <h2>How it works</h2>
+      <p class="muted">Four simple steps from pickup to happy customers.</p>
+      <div class="steps" style="margin-top:14px">
+        <div class="step"><div class="num">1</div><h3>Book</h3><p>Schedule a pickup or import orders via CSV/API.</p></div>
+        <div class="step"><div class="num">2</div><h3>Pick up</h3><p>Driver scans and secures your parcels.</p></div>
+        <div class="step"><div class="num">3</div><h3>Track</h3><p>Real‑time tracking + delivery ETA for recipients.</p></div>
+        <div class="step"><div class="num">4</div><h3>Deliver</h3><p>Photo/signature proof and instant status updates.</p></div>
+      </div>
+
+      <div class="cta-band">
+        <div>
+          <b>Ready to ship smarter?</b><br>
+          <span class="muted">Get a tailored plan for your volume and lanes.</span>
+        </div>
+        <a class="button" href="#pricing">See pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="section">
+    <div class="container">
+      <div class="tgrid">
+        <div class="testimonial">
+          <div class="tquote">“Moose Cargo helped us slash delivery times and keep customers smiling. Onboarding took less than a day.”</div>
+          <div class="muted" style="margin-top:8px">— Jenna, Operations Lead @ PrairieGoods</div>
+        </div>
+        <div class="price">
+          <b>Avg. on‑time rate</b>
+          <div style="font-size:36px;margin-top:4px">98.7%</div>
+          <div class="muted">Last 90 days</div>
+        </div>
+      </div>
+
+      <div class="plans">
+        <div class="plan">
+          <h3>Starter</h3>
+          <div class="tag">Pay‑as‑you‑go</div>
+          <p>$6 / stop • No minimums<br>Best for boutiques & pop‑ups.</p>
+          <a href="#contact" class="button">Start free</a>
+        </div>
+        <div class="plan">
+          <h3>Growth</h3>
+          <div class="tag">Most popular</div>
+          <p>$4.25 / stop • 300+ stops/mo<br>Custom zones & branded tracking.</p>
+          <a href="#contact" class="button">Talk to sales</a>
+        </div>
+        <div class="plan">
+          <h3>Enterprise</h3>
+          <div class="tag">Custom</div>
+          <p>SLAs, dedicated support, and volume discounts across regions.</p>
+          <a href="#contact" class="button">Book a demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <h2>Let’s get your deliveries moving</h2>
+      <p class="muted">Tell us a bit about your business and we’ll tailor a plan.</p>
+      <form onsubmit="event.preventDefault(); alert('Thanks! We\'ll be in touch.');" class="grid-3" style="margin-top:14px">
+        <div class="feature"><label>Full name<br><input required placeholder="Jane Doe" style="all:unset;background:#0f1116;border:1px solid #ffffff12;border-radius:10px;padding:10px 12px;display:block;width:100%;margin-top:8px"></label></div>
+        <div class="feature"><label>Business email<br><input type="email" required placeholder="you@company.com" style="all:unset;background:#0f1116;border:1px solid #ffffff12;border-radius:10px;padding:10px 12px;display:block;width:100%;margin-top:8px"></label></div>
+        <div class="feature"><label>Monthly deliveries<br><select style="width:100%;background:#0f1116;border:1px solid #ffffff12;border-radius:10px;padding:10px 12px;margin-top:8px;color:var(--text)"><option value="0-100">0–100</option><option value="100-300">100–300</option><option value="300-1000">300–1,000</option><option value="1000+">1,000+</option></select></label></div>
+        <div class="feature" style="grid-column:1/-1">
+          <label>Anything else?<br>
+            <textarea rows="4" placeholder="e.g., cold chain, signatures, special zones…" style="width:100%;background:#0f1116;border:1px solid #ffffff12;border-radius:10px;padding:10px 12px;margin-top:8px;color:var(--text)"></textarea>
+          </label>
+          <div style="margin-top:12px;display:flex;gap:12px;align-items:center">
+            <button class="button">Send</button>
+            <span class="muted">Average reply time: under 2 hours</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>
+          <a class="brand" href="#home"><img src="assets/logo.png" alt=""><span>Moose Cargo</span></a>
+          <p class="muted" style="margin-top:10px">Fast, friendly, and reliable last‑mile delivery across Canada.</p>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="#">About</a>
+          <a href="#">Drivers</a>
+          <a href="#">Careers</a>
+        </div>
+        <div>
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#">API Docs</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <a href="#contact">Sales</a>
+          <a href="mailto:hello@moosecargo.ca">hello@moosecargo.ca</a>
+          <a href="#">Status</a>
+        </div>
+      </div>
+      <div class="copyright">© <span id="y"></span> Moose Cargo Inc. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
