@@ -144,6 +144,10 @@
     .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--navy)}
     form.quote .btn{width:100%;margin-top:6px}
     .form-note{text-align:center;color:var(--muted);font-size:13.5px;margin-top:14px}
+    .form-note.ok{color:#1a8f4c;font-weight:600}
+    .form-note.err{color:var(--red);font-weight:600}
+    .hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .btn[disabled]{opacity:.65;cursor:not-allowed;transform:none}
 
     /* Footer */
     footer{background:var(--navy-dark);color:#9FB1C6;padding:70px 0 0;font-size:15px}
@@ -475,8 +479,9 @@
             <div class="field"><label for="froute">Route (From → To)</label><input id="froute" name="route" placeholder="e.g. Saskatoon → Toronto"></div>
           </div>
           <div class="field"><label for="fmsg">Shipment Details</label><textarea id="fmsg" name="message" rows="4" placeholder="Weight, dimensions, temperature requirements, timeline…"></textarea></div>
-          <button type="submit" class="btn btn-red">Send Quote Request</button>
-          <p class="form-note">Submitting opens your email app with the details pre-filled — or call us directly at (639) 480-8080.</p>
+          <div class="hp" aria-hidden="true"><label for="fwebsite">Website</label><input id="fwebsite" name="website" tabindex="-1" autocomplete="off"></div>
+          <button type="submit" class="btn btn-red" id="quoteSubmit">Send Quote Request</button>
+          <p class="form-note" id="formStatus">We reply to quote requests promptly — or call us directly at (639) 480-8080.</p>
         </form>
       </div>
     </div>
@@ -542,21 +547,47 @@
     }, {threshold:.12});
     document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 
-    // Quote form -> opens email client pre-filled
+    // Quote form -> submits to /api/contact, falls back to mailto if that fails
     document.getElementById('quoteForm').addEventListener('submit', function(ev){
       ev.preventDefault();
       var f = ev.target;
-      var body =
-        'Name: ' + f.name.value + '\n' +
-        'Company: ' + f.company.value + '\n' +
-        'Phone: ' + f.phone.value + '\n' +
-        'Email: ' + f.email.value + '\n' +
-        'Freight Type: ' + f.freight.value + '\n' +
-        'Route: ' + f.route.value + '\n\n' +
-        'Details:\n' + f.message.value;
-      window.location.href = 'mailto:robin@moosecargo.ca'
-        + '?subject=' + encodeURIComponent('Quote Request — ' + f.freight.value)
-        + '&body=' + encodeURIComponent(body);
+      var btn = document.getElementById('quoteSubmit');
+      var status = document.getElementById('formStatus');
+      var payload = {
+        name: f.name.value,
+        company: f.company.value,
+        phone: f.phone.value,
+        email: f.email.value,
+        freight: f.freight.value,
+        route: f.route.value,
+        message: f.message.value,
+        website: f.website.value // honeypot
+      };
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      status.className = 'form-note';
+      status.textContent = 'Sending your request…';
+
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function(res){
+        return res.json().then(function(data){ return { ok: res.ok, data: data }; });
+      }).then(function(result){
+        if (!result.ok || !result.data.ok) throw new Error(result.data && result.data.error);
+        btn.textContent = 'Send Quote Request';
+        btn.disabled = false;
+        status.className = 'form-note ok';
+        status.textContent = 'Thanks! Your request has been sent — we\'ll be in touch shortly.';
+        f.reset();
+      }).catch(function(){
+        btn.textContent = 'Send Quote Request';
+        btn.disabled = false;
+        status.className = 'form-note err';
+        status.textContent = 'Something went wrong. Please call us at (639) 480-8080 or email robin@moosecargo.ca directly.';
+      });
     });
   </script>
 </body>
