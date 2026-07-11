@@ -1,0 +1,30 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Navy tile -->
+  <rect x="8" y="8" width="496" height="496" rx="112" fill="#0F2D52"/>
+
+  <!-- Antlers: beam + fanned tines from one joint -->
+  <g stroke="#FFFFFF" stroke-width="27" stroke-linecap="round" fill="none">
+    <path d="M218 208 L162 196"/>
+    <path d="M162 196 L176 130"/>
+    <path d="M162 196 L132 142"/>
+    <path d="M162 196 L112 182"/>
+    <path d="M294 208 L350 196"/>
+    <path d="M350 196 L336 130"/>
+    <path d="M350 196 L380 142"/>
+    <path d="M350 196 L400 182"/>
+  </g>
+
+  <!-- Head -->
+  <path d="M206 190 L306 190 L296 268 L316 306 L316 364 Q316 408 256 408 Q196 408 196 364 L196 306 L216 268 Z" fill="#FFFFFF"/>
+
+  <!-- Red muzzle -->
+  <path d="M196 342 L316 342 L316 364 Q316 408 256 408 Q196 408 196 364 Z" fill="#D62828"/>
+
+  <!-- Eyes -->
+  <circle cx="233" cy="242" r="13" fill="#0F2D52"/>
+  <circle cx="279" cy="242" r="13" fill="#0F2D52"/>
+
+  <!-- Nostrils -->
+  <ellipse cx="233" cy="374" rx="10" ry="13" fill="#0F2D52"/>
+  <ellipse cx="279" cy="374" rx="10" ry="13" fill="#0F2D52"/>
+</svg>
