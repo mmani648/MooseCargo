@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://moosecargo.ca/sitemap.xml
+Sitemap: https://www.moosecargo.ca/sitemap.xml
